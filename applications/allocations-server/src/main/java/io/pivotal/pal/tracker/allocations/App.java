@@ -22,9 +22,9 @@ import java.util.TimeZone;
  *   -PallocationsServerUrl=https://allocations-pal-tracker-distr.cfapps.io \
  *   -PtimesheetsServerUrl=https://timesheets-pal-tracker-distr.cfapps.io
  */
-/*@EnableWebSecurity
+@EnableWebSecurity
 @EnableResourceServer
-@EnableOAuth2Client*/
+@EnableOAuth2Client
 @SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
