@@ -8,6 +8,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.stream.binder.rabbit.config.RabbitServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -25,10 +26,15 @@ import java.util.TimeZone;
 @EnableWebSecurity
 @EnableResourceServer
 @EnableOAuth2Client
-@SpringBootApplication(exclude = {RabbitServiceAutoConfiguration.class})
+@SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
-@ComponentScan({"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"})
+@ComponentScan(value = {"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"}, excludeFilters = {
+        @ComponentScan.Filter(
+                type = FilterType.ASSIGNABLE_TYPE,
+                classes = RabbitServiceAutoConfiguration.class
+        )
+})
 public class App {
 
     public static void main(String[] args) {
