@@ -5,8 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.stream.binder.rabbit.config.RabbitServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestOperations;
 
 import java.util.TimeZone;
@@ -18,7 +22,10 @@ import java.util.TimeZone;
  *   -PallocationsServerUrl=https://allocations-pal-tracker-distr.cfapps.io \
  *   -PtimesheetsServerUrl=https://timesheets-pal-tracker-distr.cfapps.io
  */
-@SpringBootApplication
+@EnableWebSecurity
+@EnableResourceServer
+@EnableOAuth2Client
+@SpringBootApplication(exclude = {RabbitServiceAutoConfiguration.class})
 @EnableEurekaClient
 @EnableCircuitBreaker
 @ComponentScan({"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"})
