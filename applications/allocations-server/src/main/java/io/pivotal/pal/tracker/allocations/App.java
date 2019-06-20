@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.stream.binder.rabbit.config.RabbitServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -29,12 +28,7 @@ import java.util.TimeZone;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
-@ComponentScan(value = {"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"}, excludeFilters = {
-        @ComponentScan.Filter(
-                type = FilterType.ASSIGNABLE_TYPE,
-                classes = RabbitServiceAutoConfiguration.class
-        )
-})
+@ComponentScan(value = {"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"})
 public class App {
 
     public static void main(String[] args) {
