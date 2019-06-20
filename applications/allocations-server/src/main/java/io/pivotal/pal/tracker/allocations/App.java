@@ -29,12 +29,7 @@ import java.util.TimeZone;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
-@ComponentScan(value = {"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"}, excludeFilters = {
-        @ComponentScan.Filter(
-                type = FilterType.ASSIGNABLE_TYPE,
-                classes = RabbitServiceAutoConfiguration.class
-        )
-})
+@ComponentScan(value = {"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"})
 public class App {
 
     public static void main(String[] args) {
