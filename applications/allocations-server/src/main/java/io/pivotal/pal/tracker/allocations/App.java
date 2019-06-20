@@ -23,13 +23,18 @@ import java.util.TimeZone;
  *   -PallocationsServerUrl=https://allocations-pal-tracker-distr.cfapps.io \
  *   -PtimesheetsServerUrl=https://timesheets-pal-tracker-distr.cfapps.io
  */
-@EnableWebSecurity
+/*@EnableWebSecurity
 @EnableResourceServer
-@EnableOAuth2Client
+@EnableOAuth2Client*/
 @SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
-@ComponentScan(value = {"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"})
+@ComponentScan(value = {"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"}, excludeFilters = {
+        @ComponentScan.Filter(
+                type = FilterType.ASSIGNABLE_TYPE,
+                classes = RabbitServiceAutoConfiguration.class
+        )
+})
 public class App {
 
     public static void main(String[] args) {
